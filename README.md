@@ -7,7 +7,7 @@ Maths coursework 2020
 2. Adrian Koch
 3. Jo Merrick
 4. Marcus Neo
-5. Maelle Choco
+5. Maelle Guerre
 6. Omar Sharif
 
 ## File structure
