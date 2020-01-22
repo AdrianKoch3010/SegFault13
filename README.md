@@ -3,6 +3,12 @@
 Maths coursework 2020
 
 ## Group members
+1. Hussain Kurabadwala
+2. Adrian Koch
+3. Jo Merrick
+4. Marcus Neo
+5. Maelle Choco
+6. Omar Sharif
 
 ## File structure
 ### Exercise 1
