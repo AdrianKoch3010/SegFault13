@@ -24,20 +24,18 @@ function [x_out, y_out] = RK2(ODE, step_size, final_val, xi, yi)
     end
     
     % For heun
-    % Run for N - 1 iterations
+    y = yi;
+    x = xi;
     for i = 1 : N - 1
-       y_predictor = y_values(i) + step_size * feval(ODE, x_values(i), y_values(i));
-       % Gradient at x (current x = x_values(i))
-       grad_1 = feval(ODE, x_values(i), y_values(i));
-       % Gradient at x + h (step size)
-       grad_2 = feval(ODE, x_values(i) + step_size, y_predictor);
+       y_predictor = y + step_size * feval(ODE, x, y);
+       % Gradient at x
+       gard_1 = feval(ODE, x, y);
+       % Gradient at x + h
+       grad_2 = feval(ODE, x + step_size, y_predictor);
        
        % Average the gradient
        y_average = (grad_1 + grad_2) * 0.5;
        
-       % Set new x and y
-       y_values(i + 1) = y_values(i) + (step_size * y_average);
-       x_values(i + 1) = x_values(i) + step_size;
     end
     
     % Return the output arrays
