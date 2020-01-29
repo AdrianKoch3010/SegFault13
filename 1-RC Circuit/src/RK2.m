@@ -1,4 +1,4 @@
-function [x_out, y_out] = RK2(ODE, step_size, final_val, xi, yi)
+function [x_values, y_values] = RK2(ODE, step_size, final_val, xi, yi)
     % ODE solver
     % @param ODE The ODE to be solved in the form y' = f(x, y)
     % @param step_size aka h The distance on the x-axis between two
@@ -19,9 +19,9 @@ function [x_out, y_out] = RK2(ODE, step_size, final_val, xi, yi)
 
     % For euler
     % Run for N - 1 iterations
-    for i = 1 : N - 1
-        y_values(i + 1) = y_values(i) + step_size * feval(ODE, x_values(i), y_values(i));
-    end
+    %for i = 1 : N - 1
+    %    y_values(i + 1) = y_values(i) + step_size * feval(ODE, x_values(i), y_values(i));
+    %end
     
     % For heun
     % Run for N - 1 iterations
@@ -41,7 +41,7 @@ function [x_out, y_out] = RK2(ODE, step_size, final_val, xi, yi)
     end
     
     % Return the output arrays
-    x_out = x_values;
-    y_out = y_values;
+    
+    
 end
 
