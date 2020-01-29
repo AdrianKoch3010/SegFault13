@@ -1,0 +1,62 @@
+Capacitor current i_c (t)  = (Cd_v (t))/dt
+
+Since current is constant throughout the series circuit i_c(t) = i(t)
+
+Potential Difference between the resistor V_R= i(t)R
+
+Substituting i(t)  with (Cd_v (t))/dt  
+
+V_in (t)= V_R (t)+ V_C (t)
+
+Substituting V_R (t)  with RC (dv_c (t))/dt
+V_in(t) = RC (dv_c (t))/dt+ V_c (t)
+
+Let y = V_c (t)
+
+Then 
+
+RCy ̇+y= V_in(t) 
+
+For R = 1kΩ , C =100nF,
+0.0001y ̇+y= V_in(t) 
+
+The solution for this circuit is:
+
+\\
+
+Runge-Kutta 2nd order method:
+et i=0, hence y_i= y_0, y_i+1 = y_1
+
+We get y_1= y_0+ (a_1 k_1+ a_2 k_2 )h
+
+And that k_1= f(x_0, y_0 )
+And k_2= f(x_0+ ph  y_0+ qk_1 h
+Substituting k_1  into the k_2  equation, 
+K_2= f[x_0+ ph, y_0+ qh�(x_0, y_0 )]
+
+We then solve for y_1  , and set the value of using x_1  and y_1  we can increment to find x_2  and y_2.
+
+
+Variable	Heun Method	Midpoint Method	Ralston Method
+a1	        1/2	                0	          1/3
+a2	        1/2	                1	          2/3
+p1	         1	               1/2	          3/4
+q1	         1	               1/2	          3/4
+
+Pseudo Code:
+	1. Write a function in terms of x & y known as f(x,y)
+	2. Set initial v_0  value
+	3. Set initial v_c  value
+	4. Set the final value of x
+
+	5. Set the step size of x, known as h
+	6. Set the value of a_1, a_2, p, q
+
+	6. While x_0≤ x_n
+		a. K_1  = f(x_0,y_0)                                        // compute k1 
+		b. X_1  = x_0+h                                             //using step size get x1  
+		c. K_2= f[x_0+ ph, y_0+ qh�(x_0, y_0 )]                    //compute k2
+		d. Y_1= y_0+h(ak_1+bk_2)                                    //using k1 and k2, compute y1 
+		e. Save the values of x_1  and y_1
+		f. X_0= x_1                                                 //set x0 to be x1 so that the next loop x1 will become x2
+		g. Y_0= y_1                                                 //set y0 to be y1 so that the next loop y1 will become y2
