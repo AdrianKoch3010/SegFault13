@@ -40,8 +40,5 @@ function [x_values, y_values] = RK2(ODE, step_size, final_val, xi, yi)
        x_values(i + 1) = x_values(i) + step_size;
     end
     
-    % Return the output arrays
-    
-    
 end
 

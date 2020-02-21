@@ -1,4 +1,4 @@
-function [x_values, y_values, z_values] = RK4(ODE_y, ODE_z, step_size, final_val, yi, zi)
+function [x_values, y_values, z_values] = RK4(ODE_y, ODE_z, h, final_val, yi, zi)
     % ODE Coupled second order ODE solver
     % @param ODE_y The ODE to be solved in the form y' = f(x, y, z)
     % @param ODE_z The ODE to be solved in the form z' = g(x, y, z)
@@ -10,7 +10,7 @@ function [x_values, y_values, z_values] = RK4(ODE_y, ODE_z, step_size, final_val
     
 
     % Calculate the number of steps
-    N = round(final_val / step_size);
+    N = round(final_val / h);
 
     % Initialise output arrays
     x_values = zeros(1, N);
@@ -23,17 +23,19 @@ function [x_values, y_values, z_values] = RK4(ODE_y, ODE_z, step_size, final_val
     
     
     for i = 1 : N - 1
-        k0 = step_size * feval(ODE_y, x_values(i), y_values(i), z_values(1));
-        l0 = step_size * feval(ODE_z, x_values(i), y_values(i), z_values(1));
-        k1 = step_size * feval(ODE_z, x_values(i), y_values(i), z_values(1));
-        l1 = 
-        k2 =
-        l2 =
-        k3 =
-        l3 =
+        % Calculate the coefficients
+        k0 = h * feval(ODE_y, x_values(i), y_values(i), z_values(1));
+        l0 = h * feval(ODE_z, x_values(i), y_values(i), z_values(1));
+        k1 = h * feval(ODE_y, x_values(i) + (0.5 * h), y_values(i) + (0.5 * k0), z_values(1) + (0.5 * l0));
+        l1 = h * feval(ODE_z, x_values(i) + (0.5 * h), y_values(i) + (0.5 * k0), z_values(1) + (0.5 * l0));
+        k2 = h * feval(ODE_y, x_values(i) + (0.5 * h), y_values(i) + (0.5 * k1), z_values(1) + (0.5 * l1));
+        l2 = h * feval(ODE_z, x_values(i) + (0.5 * h), y_values(i) + (0.5 * k1), z_values(1) + (0.5 * l1));
+        k3 = h * feval(ODE_y, x_values(i) + h, y_values(i) + k2, z_values(i) + l2);
+        l3 = h * feval(ODE_z, x_values(i) + h, y_values(i) + k2, z_values(i) + l2);
         
+        x_values(i + 1) = x_values(i) + h;
+        y_values(i + 1) = y_values(i) + ((1.0 / 6.0) * (k0 + 2*k1 + 2*k2 + k3));
+        z_values(i + 1) = z_values(i) + ((1.0 / 6.0) * (l0 + 2*l1 + 2*l2 + l3));
     end
-
-
 
 end
