@@ -2,29 +2,33 @@
 % the numerical solution is compared to the mathamtically computed exact solution
 % the error is then plotted for each method.
 
-
-
- %stop here
+ %values for ODE
 h = 0.000001;
+t0 = 0;
 tf = 1000*h;%step size
-tau = 500*10^-6;
+y0 = 500/100;
+C = 100*10^-9;
+R = 1000;
+T = 100*10^-6
+Vin = 5*cos((2*pi*t)/T);
 
 %ODE for input into numerical methods - corresponds to the RC circuit
-ODE =@;
+% y = qc(t) here 
+ODE =@(t, y) : (Vin*C - y)/ (RC^2);
 
-Vin =@; %input of the system
 
 %numerical analysis values 
-[t1,he] = RK2(func,h, tf,t,Vin);
+[ta,heun_numerical] = RK2(ODE,h, tf,t0,y0);
 
 %call IDE solve to get the exact value of the function
-[t1, heun] = ode45(ODE, [t0, tf], y0);
+[t1, heun_exact] = ode45(ODE, [t0, tf], y0);
+
 % Plot the error of each of the numerical methods
 %error = exact solution - numerical solution
 
 
 figure;
-error_heun = feval(exactout, t1, Vin, exacti)-he;
+error_heun = feval(heun_exact, t1, Vin, ta)-heun_numerical;
 
 
 %label plots
@@ -38,17 +42,16 @@ title('Heun error vs time');
 %log-log plot
 tf = 5; %stop here
 
-for ind=15:20   %create loop to carry out error analysis for different step sizes
-    h = 2^(-ind);
+for stepsize=15:20   %create loop to carry out error analysis for different step sizes
+    h = 2^(-stepsize);
     tf = 1000*h;
     %input to the system
     %exact solution as before
     
+    %numerical analysis values 
+    [ta,heun_numerical] = RK2(func,h, tf,t,Vin);
     
-    %carry out the numerical analysis of the system
-    [t1,he] = heun(func,i0,Vin,tf,R,h);
-    
-    error_heun = max(abs(feval(exactout, t1, Vin, exacti)-he));
+    error_heun = max(abs(feval(heun_exact, t1, Vin, ta)-heun_numerical));
     
     %error of each of the numerical methods
     %error is maximum of (error = exact - numerical)
