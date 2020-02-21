@@ -9,7 +9,7 @@ h = 0.000001;
 tf = 1000*h;%step size
 tau = 500*10^-6;
 
-%ODE for input into numerical methods - corresponds to the RL circuit
+%ODE for input into numerical methods - corresponds to the RC circuit
 ODE =@;
 
 Vin =@; %input of the system
@@ -18,7 +18,7 @@ Vin =@; %input of the system
 [t1,he] = RK2(func,h, tf,t,Vin);
 
 %call IDE solve to get the exact value of the function
-[t1, heun] = ode45(ODE, [t0, tf], 500);
+[t1, heun] = ode45(ODE, [t0, tf], y0);
 % Plot the error of each of the numerical methods
 %error = exact solution - numerical solution
 
