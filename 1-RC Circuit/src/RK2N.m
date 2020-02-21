@@ -20,11 +20,11 @@ function [x_values, y_values] = RK2N(ODE, step_size, final_val, xi, yi)
     %%%%%%%% EDIT VALUE OF A FOR DIFFERENT METHODS %%%%%%%
     
     % For heun
-    a = 0.5;
+     a = 0.5;
     % For Midpoint
     % a = 0;
     % For Ralston
-    % a = 1/3;
+    %a = 1/3;
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
