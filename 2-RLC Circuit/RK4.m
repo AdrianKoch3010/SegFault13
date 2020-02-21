@@ -1,4 +1,4 @@
-function [x_values, y_values, z_values] = RK4(ODE_y, ODE_z, h, final_val, yi, zi)
+function [x_values, y_values, z_values] = RK4(ODE_y, ODE_z, h, final_val, xi, yi, zi)
     % ODE Coupled second order ODE solver
     % @param ODE_y The ODE to be solved in the form y' = f(x, y, z)
     % @param ODE_z The ODE to be solved in the form z' = g(x, y, z)
