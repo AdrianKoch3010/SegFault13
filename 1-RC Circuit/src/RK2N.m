@@ -1,4 +1,4 @@
-function [x_values, y_values] = RK2N(ODE, step_size, final_val, xi, yi)
+function [x_values, y_values] = RK2N(ODE, step_size, final_val, xi, yi, RKMETHOD)
     % ODE solver
     % @param ODE The ODE to be solved in the form y' = f(x, y)
     % @param step_size aka h The distance on the x-axis between two
@@ -18,9 +18,11 @@ function [x_values, y_values] = RK2N(ODE, step_size, final_val, xi, yi)
     y_values(1) = yi;
 
     %%%%%%%% EDIT VALUE OF A FOR DIFFERENT METHODS %%%%%%%
+    % For Dynamic user input:
     
+    a = RKMETHOD;
     % For heun
-     a = 0.5;
+    % a = 0.5;
     % For Midpoint
     % a = 0;
     % For Ralston
