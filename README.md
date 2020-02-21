@@ -17,4 +17,6 @@ There are two files RK2.m and RK2script.m. The first contains the ODE solver fun
 
 #### Exercise 2
 
-### 2 - RCL Circuit (Second order ODE)
+### 2 - RLC Circuit (Second order ODE)
+
+#### Exercise 3
