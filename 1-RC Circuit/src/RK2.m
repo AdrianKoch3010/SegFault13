@@ -15,7 +15,7 @@ function [x_values, y_values] = RK2(ODE, step_size, final_val, xi, yi)
     x_values = zeros(1, N);
     y_values = zeros(1, N);
     x_values(1) = xi;
-    y_values(2) = yi;
+    y_values(1) = yi;
 
     % For euler
     % Run for N - 1 iterations
