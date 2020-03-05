@@ -5,7 +5,7 @@ function [grid] = relaxation(grid_size, b1, b2, b3, b4, e)
     
     % Calculate the average value of the boundaries
     x_array = 1 : grid_size;
-    x_array = x_array / grid_sise;
+    x_array = x_array / grid_size;
     b1_vals = arrayfun(b1, x_array);
     b2_vals = arrayfun(b2, x_array);
     b3_vals = arrayfun(b3, x_array);
@@ -24,7 +24,7 @@ function [grid] = relaxation(grid_size, b1, b2, b3, b4, e)
     done = true;
     residuals = zeros(grid_size, grid_size);
     while done
-        for j = 2 : gird_size - 1
+        for j = 2 : grid_size - 1
             for i = 2 : grid_size - 1
                 r = 0.25 * (grid(i+1, j) + grid(i-1, j) + grid(i, j+1) + grid(i, j-1) - 4*grid(i, j));
                 residuals(i, j) = r;
