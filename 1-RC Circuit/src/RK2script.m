@@ -18,20 +18,29 @@
 M1 = "Midpoint Method";
 M2 = "Heun's Method";
 M3 = "Our Custom Quarter Method";
+M4 = "Input V_in";
 %%%%%%%%%%%TEST 1: Y = 2.5 %%%%%%%%%%%%%%%%%%
 
 ODE = @(x, y) (2.5-y)*10000;
 figure; hold on;
-[out_x1, out_y1] = RK2N(ODE, 0.001, 0.005, 0, 5, 0);
+[out_x1, out_y1] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0);
 a1 = plot(out_x1, out_y1);
 
-[out_x2, out_y2] = RK2N(ODE, 0.001, 0.005, 0, 5, 0.5);
+[out_x2, out_y2] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.5);
 a2 = plot(out_x2, out_y2);
 
-[out_x3, out_y3] = RK2N(ODE, 0.001, 0.005, 0, 5, 0.25);
+[out_x3, out_y3] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.25);
 a3 = plot(out_x3, out_y3);
+input_x = zeros(1, 101);
+input_y = zeros(1,101);
+for i=1:101
+    input_x(i) = 0.00003*(i-1); 
+    input_y(i) = 2.5;    
+end
+a4 = plot(input_x, input_y);
+ylim([0, 5]);
 
-legend([a1; a2; a3], [M1; M2; M3]);
+legend([a1; a2; a3; a4], [M1; M2; M3; M4]);
 hold off;
 
 title('Test 1: Step function');
@@ -40,34 +49,48 @@ ylabel('Voltage/V');
 
 
 %%%%%%%%%%%TEST 2: Y = Impulse and decay signal 1 %%%%%%%%%%%%%%%%%%
-ODE = @(x,y) ((2.5)*exp(-x^2/100)-y)*10000;
+ODE = @(x,y) ((2.5)*exp(-(x^2/0.0001))-y)*10000;
 figure; hold on;
-[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0);
+[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0);
 a4 = plot(out_x4, out_y4);
 
-[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.5);
+[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.5);
 a5 = plot(out_x5, out_y5);
 
-[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.25);
+[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.25);
 a6 = plot(out_x6, out_y6);
 
-legend([a4; a5; a6], [M1; M2; M3]);
+for i=1:101
+    input_x(i) = 0.00003*(i-1); 
+    input_y(i) = 2.5*exp(-((input_x(i))^2/0.0001));    
+end
+a7 = plot(input_x, input_y);
+ylim([0, 5]);
+
+legend([a4; a5; a6; a7], [M1; M2; M3; M4]);
 hold off;
 title('Test 2: impulse and decay signal 1');
 xlabel('Time/t');
 ylabel('Voltage/V');
 
 %%%%%%%%%%%TEST 3: Y = Impulse and decay signal 2 %%%%%%%%%%%%%%%%%%
-ODE = @(x,y) ((2.5)*(exp(-x/100)-y)*10000);
+ODE = @(x,y) ((2.5)*(exp(-x/0.0001)-y)*10000);
 figure; hold on;
-[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0);
+[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0);
 a4 = plot(out_x4, out_y4);
 
-[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.5);
+[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.5);
 a5 = plot(out_x5, out_y5);
 
-[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.25);
+[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.25);
 a6 = plot(out_x6, out_y6);
+
+for i=1:1001
+    input_x(i) = 0.00003*(i-1); 
+    input_y(i) = 2.5*exp(-(input_x(i)/0.0001)*10000);    
+end
+a7 = plot(input_x, input_y);
+ylim([0, 5]);
 
 legend([a4; a5; a6], [M1; M2; M3]);
 hold off;
@@ -78,13 +101,13 @@ ylabel('Voltage/V');
 %%%%%%%%%%%TEST 4: Y = Sine, period 100us %%%%%%%%%%%%%%%%%%
 ODE = @(x,y) ((5*sin(2*pi*(10^4)*x)-y)*10000);
 figure; hold on;
-[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0);
+[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0);
 a4 = plot(out_x4, out_y4);
 
-[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.5);
+[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.5);
 a5 = plot(out_x5, out_y5);
 
-[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.25);
+[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.25);
 a6 = plot(out_x6, out_y6);
 
 legend([a4; a5; a6], [M1; M2; M3]);
@@ -96,13 +119,13 @@ ylabel('Voltage/V');
 %%%%%%%%%%%TEST 5: Y = Sine, period 10us %%%%%%%%%%%%%%%%%%
 ODE = @(x,y) ((5*sin(2*pi*(10^5)*x)-y)*10000);
 figure; hold on;
-[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0);
+[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0);
 a4 = plot(out_x4, out_y4);
 
-[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.5);
+[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.5);
 a5 = plot(out_x5, out_y5);
 
-[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.25);
+[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.25);
 a6 = plot(out_x6, out_y6);
 
 legend([a4; a5; a6], [M1; M2; M3]);
@@ -114,13 +137,13 @@ ylabel('Voltage/V');
 %%%%%%%%%%%TEST 6: Y = Sine, period 500us %%%%%%%%%%%%%%%%%%
 ODE = @(x,y) ((5*sin(2*pi*(10^4)/5*x)-y)*10000);
 figure; hold on;
-[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0);
+[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0);
 a4 = plot(out_x4, out_y4);
 
-[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.5);
+[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.5);
 a5 = plot(out_x5, out_y5);
 
-[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.25);
+[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.25);
 a6 = plot(out_x6, out_y6);
 
 legend([a4; a5; a6], [M1; M2; M3]);
@@ -132,13 +155,13 @@ ylabel('Voltage/V');
 %%%%%%%%%%%TEST 7: Y = Sine, period 1000us %%%%%%%%%%%%%%%%%%
 ODE = @(x,y) ((5*sin(2*pi*(10^3)*x)-y)*10000);
 figure; hold on;
-[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0);
+[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0);
 a4 = plot(out_x4, out_y4);
 
-[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.5);
+[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.5);
 a5 = plot(out_x5, out_y5);
 
-[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.25);
+[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.25);
 a6 = plot(out_x6, out_y6);
 
 legend([a4; a5; a6], [M1; M2; M3]);
@@ -150,13 +173,13 @@ ylabel('Voltage/V');
 %%%%%%%%%%%TEST 8: Y = Square, period 100us %%%%%%%%%%%%%%%%%%
 ODE = @(x,y) ((5*square(2*pi*(10^4)*x)-y)*10000);
 figure; hold on;
-[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0);
+[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0);
 a4 = plot(out_x4, out_y4);
 
-[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.5);
+[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.5);
 a5 = plot(out_x5, out_y5);
 
-[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.25);
+[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.25);
 a6 = plot(out_x6, out_y6);
 
 legend([a4; a5; a6], [M1; M2; M3]);
@@ -168,13 +191,13 @@ ylabel('Voltage/V');
 %%%%%%%%%%%TEST 9: Y = Square, period 10us %%%%%%%%%%%%%%%%%%
 ODE = @(x,y) ((5*square(2*pi*(10^5)*x)-y)*10000);
 figure; hold on;
-[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0);
+[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0);
 a4 = plot(out_x4, out_y4);
 
-[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.5);
+[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.5);
 a5 = plot(out_x5, out_y5);
 
-[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.25);
+[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.25);
 a6 = plot(out_x6, out_y6);
 
 legend([a4; a5; a6], [M1; M2; M3]);
@@ -186,13 +209,13 @@ ylabel('Voltage/V');
 %%%%%%%%%%%TEST 10: Y = Square, period 500us %%%%%%%%%%%%%%%%%%
 ODE = @(x,y) ((5*square(2*pi*(10^4)/5*x)-y)*10000);
 figure; hold on;
-[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0);
+[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0);
 a4 = plot(out_x4, out_y4);
 
-[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.5);
+[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.5);
 a5 = plot(out_x5, out_y5);
 
-[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.25);
+[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.25);
 a6 = plot(out_x6, out_y6);
 
 legend([a4; a5; a6], [M1; M2; M3]);
@@ -204,13 +227,13 @@ ylabel('Voltage/V');
 %%%%%%%%%%%TEST 11: Y = Square, period 1000us %%%%%%%%%%%%%%%%%%
 ODE = @(x,y) ((5*square(2*pi*(10^3)*x)-y)*10000);
 figure; hold on;
-[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0);
+[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0);
 a4 = plot(out_x4, out_y4);
 
-[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.5);
+[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.5);
 a5 = plot(out_x5, out_y5);
 
-[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.25);
+[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.25);
 a6 = plot(out_x6, out_y6);
 
 legend([a4; a5; a6], [M1; M2; M3]);
@@ -222,13 +245,13 @@ ylabel('Voltage/V');
 %%%%%%%%%%%TEST 12: Y = Sawtooth, period 100us %%%%%%%%%%%%%%%%%%
 ODE = @(x,y) ((5*sawtooth(2*pi*(10^4)*x)-y)*10000);
 figure; hold on;
-[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0);
+[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0);
 a4 = plot(out_x4, out_y4);
 
-[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.5);
+[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.5);
 a5 = plot(out_x5, out_y5);
 
-[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.25);
+[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.25);
 a6 = plot(out_x6, out_y6);
 
 legend([a4; a5; a6], [M1; M2; M3]);
@@ -240,13 +263,13 @@ ylabel('Voltage/V');
 %%%%%%%%%%%TEST 13: Y = Sawtooth, period 10us %%%%%%%%%%%%%%%%%%
 ODE = @(x,y) ((5*sawtooth(2*pi*(10^5)*x)-y)*10000);
 figure; hold on;
-[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0);
+[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0);
 a4 = plot(out_x4, out_y4);
 
-[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.5);
+[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.5);
 a5 = plot(out_x5, out_y5);
 
-[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.25);
+[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.25);
 a6 = plot(out_x6, out_y6);
 
 legend([a4; a5; a6], [M1; M2; M3]);
@@ -258,13 +281,13 @@ ylabel('Voltage/V');
 %%%%%%%%%%%TEST 14: Y = Sawtooth, period 500us %%%%%%%%%%%%%%%%%%
 ODE = @(x,y) ((5*sawtooth(2*pi*(10^4)/5*x)-y)*10000);
 figure; hold on;
-[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0);
+[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0);
 a4 = plot(out_x4, out_y4);
 
-[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.5);
+[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.5);
 a5 = plot(out_x5, out_y5);
 
-[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.25);
+[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.25);
 a6 = plot(out_x6, out_y6);
 
 legend([a4; a5; a6], [M1; M2; M3]);
@@ -276,13 +299,13 @@ ylabel('Voltage/V');
 %%%%%%%%%%%TEST 15: Y = Sawtooth, period 1000us %%%%%%%%%%%%%%%%%%
 ODE = @(x,y) ((5*sawtooth(2*pi*(10^3)*x)-y)*10000);
 figure; hold on;
-[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0);
+[out_x4, out_y4] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0);
 a4 = plot(out_x4, out_y4);
 
-[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.5);
+[out_x5, out_y5] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.5);
 a5 = plot(out_x5, out_y5);
 
-[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.005, 0, 5, 0.25);
+[out_x6, out_y6] = RK2N(ODE, 0.00003, 0.003, 0, 5, 0.25);
 a6 = plot(out_x6, out_y6);
 
 legend([a4; a5; a6], [M1; M2; M3]);

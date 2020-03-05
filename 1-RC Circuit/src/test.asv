@@ -1,0 +1,8 @@
+exact_x = zeros(100)
+for i = 0:100
+    exact_x[i]=0.003*i;
+    exact_y[i] = 5*(2*pi*(2*pi*exp(-10000*exact_x)+sin(20000*pi*exact_x))+cos(20000*pi*exact_x))/(1+4*pi*pi);
+end
+
+figure;
+plot(exact_x, exact_y);
