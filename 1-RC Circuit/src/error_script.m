@@ -66,10 +66,13 @@ for i = 1:23
     legend([A; B; C], [Aa; Bb; Cc]);
     hold off;
     A_x(i) = log10(steps(i));
+    A_yRMS(i) = log10(rms(A_error_y));
     A_y(i) = log10(mean(A_error_y));
     B_x(i) = log10(steps(i));
+    B_yRMS(i) = log10(rms(B_error_y));
     B_y(i) = log10(mean(B_error_y));
     C_x(i) = log10(steps(i));
+    C_yRMS(i) = log10(rms(C_error_y));
     C_y(i) = log10(mean(C_error_y));
     
     
@@ -82,6 +85,15 @@ xlabel("log(step size)");
 A = plot(A_x, A_y);
 B = plot(B_x, B_y);
 C = plot(C_x, C_y);
+legend([A; B; C], [Aa; Bb; Cc]);
+hold off;
+figure; hold on;
+title("log(rms(average error)) against log(step size)");
+ylabel("log(rms(average error))");
+xlabel("log(step size)");
+A = plot(A_x, A_yRMS);
+B = plot(B_x, B_yRMS);
+C = plot(C_x, C_yRMS);
 legend([A; B; C], [Aa; Bb; Cc]);
 hold off;
 
