@@ -23,22 +23,22 @@ M4 = "Input V_in";
 
 ODE = @(x, y) (2.5-y)*10;
 figure; hold on;
-[out_x1, out_y1] = RK2N(ODE, 0.03, 3, 0, 5, 0);
+[out_x1, out_y1] = RK2N(ODE, 0.01, 1.5, 0, 5, 0);
 a1 = plot(out_x1, out_y1);
 
-[out_x2, out_y2] = RK2N(ODE, 0.03, 3, 0, 5, 0.5);
+[out_x2, out_y2] = RK2N(ODE, 0.01, 1.5, 0, 5, 0.5);
 a2 = plot(out_x2, out_y2);
 
-[out_x3, out_y3] = RK2N(ODE, 0.03, 3, 0, 5, 0.25);
+[out_x3, out_y3] = RK2N(ODE, 0.01, 1.5, 0, 5, 0.25);
 a3 = plot(out_x3, out_y3);
-input_x = zeros(1, 101);
-input_y = zeros(1,101);
-for i=1:1001
-    input_x(i) = 0.003*(i-1); 
+input_x = zeros(1, 2001);
+input_y = zeros(1,2001);
+for i=1:2001
+    input_x(i) = 0.00075*(i-1); 
     input_y(i) = 2.5;    
 end
 a4 = plot(input_x, input_y);
-ylim([0, 5]);
+ylim([2, 5]);
 
 legend([a1; a2; a3; a4], [M1; M2; M3; M4]);
 hold off;
@@ -51,17 +51,17 @@ ylabel('Voltage/V');
 %%%%%%%%%%%TEST 2: Y = Impulse and decay signal 1 %%%%%%%%%%%%%%%%%%
 ODE = @(x,y) ((2.5)*exp(-(x^2/0.1))-y)*10;
 figure; hold on;
-[out_x4, out_y4] = RK2N(ODE, 0.03, 3, 0, 5, 0);
+[out_x4, out_y4] = RK2N(ODE, 0.03, 1.5, 0, 5, 0);
 a4 = plot(out_x4, out_y4);
 
-[out_x5, out_y5] = RK2N(ODE, 0.03, 3, 0, 5, 0.5);
+[out_x5, out_y5] = RK2N(ODE, 0.03, 1.5, 0, 5, 0.5);
 a5 = plot(out_x5, out_y5);
 
-[out_x6, out_y6] = RK2N(ODE, 0.03, 3, 0, 5, 0.25);
+[out_x6, out_y6] = RK2N(ODE, 0.03, 1.5, 0, 5, 0.25);
 a6 = plot(out_x6, out_y6);
 
-for i=1:1001
-    input_x(i) = 0.003*(i-1); 
+for i=1:2001
+    input_x(i) = 0.00075*(i-1); 
     input_y(i) = 2.5*exp(-((input_x(i))^2/0.1));    
 end
 a7 = plot(input_x, input_y);
@@ -76,17 +76,17 @@ ylabel('Voltage/V');
 %%%%%%%%%%%TEST 3: Y = Impulse and decay signal 2 %%%%%%%%%%%%%%%%%%
 ODE = @(x,y) ((2.5)*(exp(-x/0.1)-y)*10);
 figure; hold on;
-[out_x4, out_y4] = RK2N(ODE, 0.03, 3, 0, 5, 0);
+[out_x4, out_y4] = RK2N(ODE, 0.02, 1, 0, 5, 0);
 a4 = plot(out_x4, out_y4);
 
-[out_x5, out_y5] = RK2N(ODE, 0.03, 3, 0, 5, 0.5);
+[out_x5, out_y5] = RK2N(ODE, 0.02, 1, 0, 5, 0.5);
 a5 = plot(out_x5, out_y5);
 
-[out_x6, out_y6] = RK2N(ODE, 0.03, 3, 0, 5, 0.25);
+[out_x6, out_y6] = RK2N(ODE, 0.02, 1, 0, 5, 0.25);
 a6 = plot(out_x6, out_y6);
 
-for i=1:1001
-    input_x(i) = 0.003*(i-1); 
+for i=1:2001
+    input_x(i) = 0.0005*(i-1); 
     input_y(i) = 2.5*exp(-(input_x(i)/0.1));    
 end
 a7 = plot(input_x, input_y);
