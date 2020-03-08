@@ -49,7 +49,7 @@ V_out = R*out_z;
 
 figure; hold on;
 plot(out_x, V_out);
-title('Test 3: Square wave, frequency 109 Hz')
+title('Test 1: ')
 xlabel('Time/ms');
 ylabel('Voltage/V');
 
@@ -64,7 +64,6 @@ V_out = R*out_z;
 
 figure; hold on;
 plot(out_x, V_out);
-title('Test 4: Square wave, frequency 5 Hz')
 xlabel('Time/ms');
 ylabel('Voltage/V');
 
@@ -79,11 +78,10 @@ V_out = R*out_z;
 
 figure; hold on;
 plot(out_x, V_out);
-title('Test 5: Square wave, frequency 500 Hz')
 xlabel('Time/ms');
 ylabel('Voltage/V');
 
-%%%%%%%%%%%TEST 6: Sine wave with frequency f = 109 Hz %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%TEST 6: Square wave with frequency f = 109 Hz %%%%%%%%%%%%%%%%%%
 input = @(x) sin(2*pi*(109)*x);
 ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
 
@@ -94,11 +92,10 @@ V_out = R*out_z;
 
 figure; hold on;
 plot(out_x, V_out);
-title('Test 6: Sine wave, frequency 109 Hz')
 xlabel('Time/ms');
 ylabel('Voltage/V');
 
-%%%%%%%%%%%TEST 7: Sine wave with frequency f = 5 Hz %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%TEST 7: Square wave with frequency f = 5 Hz %%%%%%%%%%%%%%%%%%%%
 input = @(x) sin(2*pi*(5)*x);
 ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
 
@@ -109,11 +106,10 @@ V_out = R*out_z;
 
 figure; hold on;
 plot(out_x, V_out);
-title('Test 3: Square wave, frequency 5 Hz')
 xlabel('Time/ms');
 ylabel('Voltage/V');
 
-%%%%%%%%%%%TEST 7: Sine wave with frequency f = 500 Hz %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%TEST 7: Square wave with frequency f = 500 Hz %%%%%%%%%%%%%%%%%%
 input = @(x) sin(2*pi*(500)*x);
 ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
 
@@ -124,6 +120,5 @@ V_out = R*out_z;
 
 figure; hold on;
 plot(out_x, V_out);
-title('Test 3: Square wave, frequency 500 Hz')
 xlabel('Time/ms');
 ylabel('Voltage/V');

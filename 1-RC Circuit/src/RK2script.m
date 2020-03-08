@@ -43,7 +43,7 @@ ylim([2, 5]);
 legend([a1; a2; a3; a4], [M1; M2; M3; M4]);
 hold off;
 
-title('Test 1: Step function');
+title('Test 1: Step signal');
 xlabel('Time/ms');
 ylabel('Voltage/V');
 
@@ -69,7 +69,7 @@ ylim([0, 5]);
 
 legend([a4; a5; a6; a7], [M1; M2; M3; M4]);
 hold off;
-title('Test 2: impulse and decay signal 1');
+title('Test 2: Impulse and decay signal 1');
 xlabel('Time/ms');
 ylabel('Voltage/V');
 
@@ -94,7 +94,7 @@ ylim([0, 5]);
 
 legend([a4; a5; a6; a7], [M1; M2; M3; M4]);
 hold off;
-title('Test 3: impulse and decay signal 2');
+title('Test 3: Impulse and decay signal 2');
 xlabel('Time/ms');
 ylabel('Voltage/V');
 
