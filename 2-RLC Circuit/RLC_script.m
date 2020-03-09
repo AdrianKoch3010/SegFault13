@@ -125,7 +125,7 @@ figure; hold on;
 plot(out_x, V_out);
 input_vals = arrayfun(input, out_x);
 plot(out_x, input_vals);
-title('Test 7: Square wave, frequency 5 Hz')
+title('Test 7: Sine wave, frequency 5 Hz')
 xlabel('Time/ms');
 ylabel('Voltage/V');
 
@@ -142,6 +142,6 @@ figure; hold on;
 plot(out_x, V_out);
 input_vals = arrayfun(input, out_x);
 plot(out_x, input_vals);
-title('Test 8: Square wave, frequency 500 Hz')
+title('Test 8: Sine wave, frequency 500 Hz')
 xlabel('Time/ms');
 ylabel('Voltage/V');
