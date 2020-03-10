@@ -1,5 +1,3 @@
-
-
 % Test file
 
 % Define an array of ODEs to test (these should be function handles)

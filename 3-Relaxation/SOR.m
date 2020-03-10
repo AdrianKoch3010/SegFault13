@@ -1,5 +1,7 @@
 function [grid] = SOR(grid_size, b1, b2, b3, b4, e)
-    % b1 to b4 are the boundary function called phi in the slides
+    % grid_size is the size of the grid. The grid is a square of size
+    % grid_size * grid_size
+    % b1 to b4 are the boundary functions called phi in the slides
     % b1(0, y); b2(1, y); b3(x, 0); b4(x, 1)
     % e is the required accuarcy
     
@@ -15,9 +17,9 @@ function [grid] = SOR(grid_size, b1, b2, b3, b4, e)
     % Create the grid and set the boundary values, otherwise initialise
     % with k
     grid = repmat(k, grid_size, grid_size);
-    grid(0,:) = b1_vals;
+    grid(1,:) = b1_vals;
     grid(grid_size,:) = b2_vals;
-    grid(:,0) = b3_vals;
+    grid(:,1) = b3_vals;
     grid(:,grid_size) = b4_vals;
     
     %create relaxation parameter op 
