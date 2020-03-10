@@ -3,6 +3,8 @@
 R = 250;
 C = 3.5 * 10^-6;
 L = 0.6;
+Q0 = 500 * 10^-9;
+Q_dash_0 = 0;
 
 %%%%%%%%%%%TEST 1: Step signal  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The input to the system as a function of x
@@ -12,7 +14,7 @@ ODE_y = @(x, y, z) z;
 ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
 
 % Change initial conditions!
-[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.3, 0, 500 * 10^-9, 0);
+[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.3, 0, Q0, Q_dash_0);
 
 % Calculate V_out as R*z
 V_out = R*out_z;
@@ -31,7 +33,7 @@ ylabel('Voltage/V');
 input = @(x) 5*exp(-x^2 / 0.003);
 ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
 
-[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.3, 0, 500 * 10^-9, 0);
+[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.3, 0, Q0, Q_dash_0);
 
 % Calculate V_out as R*z
 V_out = R*out_z;
@@ -48,7 +50,7 @@ ylabel('Voltage/V');
 input = @(x) square(2*pi*(109)*x);
 ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
 
-[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.1, 0, 500 * 10^-9, 0);
+[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.03, 0, Q0, Q_dash_0);
 
 % Calculate V_out as R*z
 V_out = R*out_z;
@@ -65,7 +67,7 @@ ylabel('Voltage/V');
 input = @(x) square(2*pi*(5)*x);
 ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
 
-[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.3, 0, 500 * 10^-9, 0);
+[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.3, 0, Q0, Q_dash_0);
 
 % Calculate V_out as R*z
 V_out = R*out_z;
@@ -82,7 +84,7 @@ ylabel('Voltage/V');
 input = @(x) square(2*pi*(500)*x);
 ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
 
-[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.07, 0, 500 * 10^-9, 0);
+[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.0000003, 0.005, 0, Q0, Q_dash_0);
 
 % Calculate V_out as R*z
 V_out = R*out_z;
@@ -99,7 +101,7 @@ ylabel('Voltage/V');
 input = @(x) sin(2*pi*(109)*x);
 ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
 
-[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.1, 0, 500 * 10^-9, 0);
+[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.1, 0, Q0, Q_dash_0);
 
 % Calculate V_out as R*z
 V_out = R*out_z;
@@ -116,7 +118,7 @@ ylabel('Voltage/V');
 input = @(x) sin(2*pi*(5)*x);
 ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
 
-[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.3, 0, 500 * 10^-9, 0);
+[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.3, 0, Q0, Q_dash_0);
 
 % Calculate V_out as R*z
 V_out = R*out_z;
@@ -129,11 +131,11 @@ title('Test 7: Sine wave, frequency 5 Hz')
 xlabel('Time/ms');
 ylabel('Voltage/V');
 
-%%%%%%%%%%%TEST 7: Sine wave with frequency f = 500 Hz %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%TEST 8: Sine wave with frequency f = 500 Hz %%%%%%%%%%%%%%%%%%
 input = @(x) sin(2*pi*(500)*x);
 ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
 
-[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.07, 0, 500 * 10^-9, 0);
+[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.07, 0, Q0, Q_dash_0);
 
 % Calculate V_out as R*z
 V_out = R*out_z;
@@ -145,3 +147,12 @@ plot(out_x, input_vals);
 title('Test 8: Sine wave, frequency 500 Hz')
 xlabel('Time/ms');
 ylabel('Voltage/V');
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% - - New circuit
+% Circuit parameters
+R = 250;
+C = 3.5 * 10^-6;
+L = 0.6;
+Q0 = 500 * 10^-9;
+Q_dash_0 = 0;
+

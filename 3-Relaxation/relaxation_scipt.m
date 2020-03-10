@@ -14,15 +14,17 @@ grid_out = relaxation(grid_size, b1, b2, b3, b3, required_accuracy);
 
 figure;
 %Hold on will plot in 2D
-%hold on;
+hold on;
 x = 0:1/grid_size:1-(1/grid_size);
 [X, Y] = meshgrid(x);
-surf(X, Y, grid_out);
+s = surf(X, Y, grid_out);
+s.EdgeColor = 'none';
 colorbar;
 
-figure;
+figure; hold on;
 x = 0:1/grid_size:1-(1/grid_size);
 grid_out = SOR(grid_size, b1, b2, b3, b3, required_accuracy);
 [X, Y] = meshgrid(x);
-surf(X, Y, grid_out);
+s = surf(X, Y, grid_out);
+s.EdgeColor = 'none';
 colorbar;
