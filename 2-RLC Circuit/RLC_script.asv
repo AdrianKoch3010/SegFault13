@@ -50,7 +50,7 @@ ylabel('Voltage/V');
 input = @(x) square(2*pi*(109)*x);
 ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
 
-[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.07, 0, Q0, Q_dash_0);
+[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.03, 0, Q0, Q_dash_0);
 
 % Calculate V_out as R*z
 V_out = R*out_z;
@@ -101,7 +101,7 @@ ylabel('Voltage/V');
 input = @(x) sin(2*pi*(109)*x);
 ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
 
-[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.07, 0, Q0, Q_dash_0);
+[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.1, 0, Q0, Q_dash_0);
 
 % Calculate V_out as R*z
 V_out = R*out_z;
