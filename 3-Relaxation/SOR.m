@@ -27,12 +27,14 @@ function [grid] = SOR(grid_size, b1, b2, b3, b4, e)
     relax = 2 - (pi*h);
     
     % Keep averaging until the required accuray is achieved
-    done = true;
+    done = false;
     residuals = zeros(grid_size, grid_size);
-    while done
+    while ~done
+        done = true;
         for j = 2 : grid_size - 1
             for i = 2 : grid_size - 1
-                r = ((1 - relax) * r)+ (0.25 * relax * (grid(i+1, j) + grid(i-1, j) + grid(i, j+1) + grid(i, j-1) - 4*grid(i, j)));
+                old_r = residuals(i, j);
+                r = ((1 - relax) * old_r)+ (0.25 * relax * (grid(i+1, j) + grid(i-1, j) + grid(i, j+1) + grid(i, j-1) - 4*grid(i, j)));
                 residuals(i, j) = r;
                 if r >= e
                     done = false;
