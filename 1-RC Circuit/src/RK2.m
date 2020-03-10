@@ -1,4 +1,4 @@
-function [x_values, y_values] = RK2N(ODE, step_size, final_val, xi, yi, RKMETHOD)
+function [x_values, y_values] = RK2(ODE, step_size, final_val, xi, yi, RKMETHOD)
     % ODE solver
     % @param ODE The ODE to be solved in the form y' = f(x, y)
     % @param step_size aka h The distance on the x-axis between two
