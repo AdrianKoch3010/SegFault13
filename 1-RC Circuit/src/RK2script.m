@@ -47,7 +47,7 @@ ylabel('Voltage/V');
 
 
 %%%%%%%%%%%TEST 2: Y = Impulse and decay signal 1 %%%%%%%%%%%%%%%%%%
-ODE = @(x,y) ((2.5)*exp(-(x^2/0.1))-y)*10;
+ODE = @(x,y) ((2.5)*exp(-(x^2/0.0001))-y)*10;
 figure; hold on;
 [out_x4, out_y4] = RK2N(ODE, 0.03, 1.5, 0, 5, 0);
 a4 = plot(out_x4, out_y4);
@@ -60,7 +60,7 @@ a6 = plot(out_x6, out_y6);
 
 for i=1:2001
     input_x(i) = 0.00075*(i-1); 
-    input_y(i) = 2.5*exp(-((input_x(i))^2/0.1));    
+    input_y(i) = 2.5*exp(-((input_x(i))^2/0.0001));    
 end
 a7 = plot(input_x, input_y);
 ylim([0, 5]);
