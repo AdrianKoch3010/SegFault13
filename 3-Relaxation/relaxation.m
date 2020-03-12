@@ -24,18 +24,19 @@ function [grid] = relaxation(grid_size, b1, b2, b3, b4, e)
     
     % Keep averaging until the required accuray is achieved
     done = false;
-    residuals = zeros(grid_size, grid_size);
+    %residuals = zeros(grid_size, grid_size);
+    residuals = grid;
     while ~done
         done = true;
         for j = 2 : grid_size - 1
             for i = 2 : grid_size - 1
-                r = 0.25 * (grid(i+1, j) + grid(i-1, j) + grid(i, j+1) + grid(i, j-1) - 4*grid(i, j));
-                residuals(i, j) = r;
+                residuals(i, j) = 0.25 * (grid(i+1, j) + grid(i-1, j) + grid(i, j+1) + grid(i, j-1));
+                r = abs(grid(i,j)-residuals(i, j));
                 if r >= e
                     done = false;
                 end
+                grid(i, j) = residuals(i, j);
             end
         end
-        grid = grid + residuals;
     end
 end

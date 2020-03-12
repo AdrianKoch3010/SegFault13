@@ -24,8 +24,10 @@ function [grid] = SOR(grid_size, b1, b2, b3, b4, e)
     
     %create relaxation parameter op 
     h = 1/(grid_size + 1);
-    relax = 2 - (pi*h);
+    relax = 2 - (pi*h); %optimal?
+    %relax = 0.2;
     
+    count = 0;
     % Keep averaging until the required accuray is achieved
     done = false;
     residuals = zeros(grid_size, grid_size);
@@ -33,14 +35,15 @@ function [grid] = SOR(grid_size, b1, b2, b3, b4, e)
         done = true;
         for j = 2 : grid_size - 1
             for i = 2 : grid_size - 1                
-                old_r = residuals(i, j);
-                r = ((1 - relax) * old_r) + (0.25 * relax * (grid(i+1, j) + grid(i-1, j) + grid(i, j+1) + grid(i, j-1) - 4*grid(i, j)));
+                %r = ((1 - relax) * grid(i, j)) + (0.25 * relax * (grid(i+1, j) + grid(i-1, j) + grid(i, j+1) + grid(i, j-1) - 4*grid(i, j)));
+                r = ((1 - relax) * grid(i, j)) + (0.25 * relax * (grid(i+1, j) + grid(i-1, j) + grid(i, j+1) + grid(i, j-1)));
                 residuals(i, j) = r;
                 if r >= e
                     done = false;
                 end
             end
         end
-        grid = grid + residuals;
+        grid = residuals;
+        count = count + 1;
     end
 end

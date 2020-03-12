@@ -16,7 +16,8 @@ function [grid] = SOR(grid_size, b1, b2, b3, b4, e)
     
     % Create the grid and set the boundary values, otherwise initialise
     % with k
-    grid = repmat(k, grid_size, grid_size);
+    %grid = repmat(k, grid_size, grid_size);
+    grid = zeros(grid_size, grid_size);
     grid(1,:) = b1_vals;
     grid(grid_size,:) = b2_vals;
     grid(:,1) = b3_vals;
@@ -24,23 +25,28 @@ function [grid] = SOR(grid_size, b1, b2, b3, b4, e)
     
     %create relaxation parameter op 
     h = 1/(grid_size + 1);
-    relax = 2 - (pi*h);
+    relax = 2 - (pi*h); %optimal?
+    %relax = 0.2;
+    relax = 1;
     
+    count = 0;
     % Keep averaging until the required accuray is achieved
     done = false;
-    residuals = zeros(grid_size, grid_size);
+    residuals = grid;
     while ~done
         done = true;
-        for j = 2 : grid_size - 1
-            for i = 2 : grid_size - 1                
-                old_r = residuals(i, j);
-                r = ((1 - relax) * old_r) + (0.25 * relax * (grid(i+1, j) + grid(i-1, j) + grid(i, j+1) + grid(i, j-1) - 4*grid(i, j)));
-                residuals(i, j) = r;
+        for j = 2 :1: grid_size - 1
+            for i = 2 :1: grid_size - 1                
+                %r = ((1 - relax) * grid(i, j)) + (0.25 * relax * (grid(i+1, j) + grid(i-1, j) + grid(i, j+1) + grid(i, j-1) - 4*grid(i, j)));
+                residuals(i, j) = ((1 - relax) * grid(i, j)) + (0.25 * relax * (grid(i+1, j) + grid(i-1, j) + grid(i, j+1) + grid(i, j-1)));
+                r = abs(residuals(i, j)-grid(i,j));
                 if r >= e
                     done = false;
                 end
+                grid(i, j) = residuals(i, j);
             end
         end
-        grid = grid + residuals;
+        
+        count = count + 1;
     end
 end
