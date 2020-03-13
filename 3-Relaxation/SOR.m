@@ -50,6 +50,7 @@ function [grid, count2] = SOR(grid_size, b1, b2, b3, b4, e, relaxIn)
         
         count2 = count2 + 1;
     end
-    disp('SOR');
-    disp(count2);
+    %disp('SOR');
+    %disp(count2);
+    count2
 end

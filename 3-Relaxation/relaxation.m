@@ -41,6 +41,5 @@ function [grid, count] = relaxation(grid_size, b1, b2, b3, b4, e)
         end
         count = count + 1;
     end
-    disp('Relax');
-    disp(count);
+    count
 end
