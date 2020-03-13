@@ -81,9 +81,9 @@ colorbar;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TEST 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 b1 = @(y) y^2;
-b2 = @(y) y^2;
+b2 = @(y) 0.5*y;
 b3 = @(x) x^2;
-b4 = @(x) x^2;
+b4 = @(x) 0.5*x^2;
 
 figure;
 [grid_out, count] = relaxation(grid_size, b1, b2, b3, b4, required_accuracy);
@@ -120,6 +120,24 @@ b1 = @(y) 2*sin(2*pi*y);
 b2 = @(y) 2*sin(2*pi*y);
 b3 = @(x) 2*sin(2*pi*x);
 b4 = @(x) 2*sin(2*pi*x);
+
+figure;
+[grid_out, count] = relaxation(grid_size, b1, b2, b3, b4, required_accuracy);
+[X, Y] = meshgrid(x);
+meshc(X, Y, grid_out);
+
+figure; hold on;
+[grid_out, count] = relaxation(grid_size * 4, b1, b2, b3, b4, required_accuracy);
+[X, Y] = meshgrid(x2);
+s2 = surf(X, Y, grid_out);
+s2.EdgeColor = 'none';
+colorbar;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TEST 7 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+b1 = @(y) y^2;
+b2 = @(y) y^2;
+b3 = @(x) x^2;
+b4 = @(x) x^2;
 
 figure;
 [grid_out, count] = relaxation(grid_size, b1, b2, b3, b4, required_accuracy);
