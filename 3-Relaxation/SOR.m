@@ -1,4 +1,4 @@
-function [grid] = SOR(grid_size, b1, b2, b3, b4, e)
+function [grid, count2] = SOR(grid_size, b1, b2, b3, b4, e, relaxIn)
     % grid_size is the size of the grid. The grid is a square of size
     % grid_size * grid_size
     % b1 to b4 are the boundary functions called phi in the slides
@@ -25,11 +25,12 @@ function [grid] = SOR(grid_size, b1, b2, b3, b4, e)
     
     %create relaxation parameter op 
     h = 1/(grid_size + 1);
-    relax = 2 - (pi*h); %optimal?
+    %relax = 2 - (pi*h); %optimal?
     %relax = 0.2;
     %relax = 1;
+    relax = relaxIn;
     
-    count = 0;
+    count2 = 0;
     % Keep averaging until the required accuray is achieved
     done = false;
     residuals = grid;
@@ -47,6 +48,8 @@ function [grid] = SOR(grid_size, b1, b2, b3, b4, e)
             end
         end
         
-        count = count + 1;
+        count2 = count2 + 1;
     end
+    disp('SOR');
+    disp(count2);
 end
