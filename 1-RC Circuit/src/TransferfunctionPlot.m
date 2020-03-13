@@ -33,3 +33,21 @@ loglog(abs(output));
 % Plot Phase
 figure; hold on;
 plot(input, angle(output));
+
+% Transfer function for the RLC circuit with critical damping
+R = 2000;
+C = 300 * 10^-9;
+L = 0.3;
+
+trans = @(w) (1i*w*R*C) / (1 + 1i*w*R*C + (1i*w)^2 * L*C);
+input = 0:5000;
+output = arrayfun(trans, input);
+
+% Plot Magnitude
+figure; hold on;
+plot(abs(output));
+%loglog(input, abs(output));
+
+% Plot Phase
+figure; hold on;
+plot(input, angle(output));

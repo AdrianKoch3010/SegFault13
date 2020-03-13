@@ -27,7 +27,7 @@ function [grid] = SOR(grid_size, b1, b2, b3, b4, e)
     h = 1/(grid_size + 1);
     relax = 2 - (pi*h); %optimal?
     %relax = 0.2;
-    relax = 1;
+    %relax = 1;
     
     count = 0;
     % Keep averaging until the required accuray is achieved
