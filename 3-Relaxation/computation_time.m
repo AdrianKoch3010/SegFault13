@@ -1,7 +1,7 @@
-relaxval = zeros(1, 500);
-SORval = zeros(1, 500);
+relaxval = zeros(1, 299);
+SORval = zeros(1, 299);
 
-for i = 2:500
+for i = 2:300
     
     close all;
     
@@ -42,10 +42,7 @@ for i = 2:500
 end
 
 figure
-plot(SORval, relaxval);
-
-figure
 hold on
-plot(SORval);
-plot(relaxval);
+plot(SORval)
+plot(relaxval)
 
