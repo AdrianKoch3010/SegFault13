@@ -1,4 +1,4 @@
-function [grid] = relaxation(grid_size, b1, b2, b3, b4, e)
+function [grid, count] = relaxation(grid_size, b1, b2, b3, b4, e)
     % grid_size is the size of the grid. The grid is a square of size
     % grid_size * grid_size
     % b1 to b4 are the boundary functions called phi in the slides
@@ -22,6 +22,7 @@ function [grid] = relaxation(grid_size, b1, b2, b3, b4, e)
     grid(:,1) = b3_vals;
     grid(:,grid_size) = b4_vals;
     
+    count = 0;
     % Keep averaging until the required accuray is achieved
     done = false;
     %residuals = zeros(grid_size, grid_size);
@@ -38,5 +39,8 @@ function [grid] = relaxation(grid_size, b1, b2, b3, b4, e)
                 grid(i, j) = residuals(i, j);
             end
         end
+        count = count + 1;
     end
+    disp('Relax');
+    disp(count);
 end
