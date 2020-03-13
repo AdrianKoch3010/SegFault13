@@ -83,7 +83,7 @@ colorbar;
 b1 = @(y) y^2;
 b2 = @(y) 0.5*y;
 b3 = @(x) x^2;
-b4 = @(x) 0.5*x^2;
+b4 = @(x) 0.5*x;
 
 figure;
 [grid_out, count] = relaxation(grid_size, b1, b2, b3, b4, required_accuracy);
