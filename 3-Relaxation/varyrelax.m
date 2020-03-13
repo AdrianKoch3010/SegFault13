@@ -1,4 +1,5 @@
-SORval = zeros(1, 99);
+SORval = zeros(1, 1000);
+xvals = zeros(1, 1000);
 n = 1;
 for i = 1:0.001:1.999
     
@@ -26,11 +27,13 @@ for i = 1:0.001:1.999
     colorbar;
     
     SORval(n) = count2;
+    xvals(n) = i;
     n = n + 1;
 end
 
 figure
+hold on
 title('Varying relaxation parameter');
 xlabel('Relaxation parameter value');
 ylabel('Count');
-plot(SORval);
+plot(xvals, SORval);
