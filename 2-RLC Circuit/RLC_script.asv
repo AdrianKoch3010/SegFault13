@@ -154,9 +154,9 @@ ylabel('Voltage/V');
 R = 2000;
 C = 300 * 10^-9;
 L = 0.3;
-Q0 = 500 * 10^-9;
-%Q0 = 0;
-%Q_dash_0 = 0;
+%Q0 = 500 * 10^-9;
+Q0 = 0;
+Q_dash_0 = 0;
 
 
 %%%%%%%%%%%TEST 1: Step signal  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -179,41 +179,6 @@ title('Test 1: Step signal (CD)')
 
 xlabel('Time/s');
 ylabel('Voltage/V');
-
-%%%%%%%%%%%TEST 2: Square wave with frequency f = 5 Hz %%%%%%%%%%%%%%%%%%%%
-input = @(x) square(2*pi*(5)*x);
-ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
-
-[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.3, 0, Q0, Q_dash_0);
-
-% Calculate V_out as R*z
-V_out = R*out_z;
-
-figure; hold on;
-plot(out_x, V_out);
-input_vals = arrayfun(input, out_x);
-plot(out_x, input_vals);
-title('Test 4´2: Square wave, frequency 5 Hz (CD)')
-xlabel('Time/s');
-ylabel('Voltage/V');
-
-%%%%%%%%%%%TEST 3: Square wave at resonance frequency (350.5 Hz) %%%%%%%%%%%%%%%%%%%%
-input = @(x) square(2*pi*(350.5)*x);
-ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
-
-[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.000003, 0.03, 0, Q0, Q_dash_0);
-
-% Calculate V_out as R*z
-V_out = R*out_z;
-
-figure; hold on;
-plot(out_x, V_out);
-input_vals = arrayfun(input, out_x);
-plot(out_x, input_vals);
-title('Test 3: Square wave, resonance frequency (350.5 Hz)(OD)')
-xlabel('Time/s');
-ylabel('Voltage/V');
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -- New circuit 2-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% overdamped
@@ -246,38 +211,4 @@ title('Test 1: Step signal (OD)')
 xlabel('Time/s');
 ylabel('Voltage/V');
 
-
-%%%%%%%%%%%TEST 2: Square wave with frequency f = 5 Hz %%%%%%%%%%%%%%%%%%%%
-input = @(x) square(2*pi*(5)*x);
-ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
-
-[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.00003, 0.3, 0, Q0, Q_dash_0);
-
-% Calculate V_out as R*z
-V_out = R*out_z;
-
-figure; hold on;
-plot(out_x, V_out);
-input_vals = arrayfun(input, out_x);
-plot(out_x, input_vals);
-title('Test 2: Square wave, frequency 5 Hz (OD)')
-xlabel('Time/s');
-ylabel('Voltage/V');
-
-%%%%%%%%%%%TEST 3: Square wave at resonance frequency (102.7 Hz) %%%%%%%%%%%%%%%%%%%%
-input = @(x) square(2*pi*(102.7)*x);
-ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
-
-[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.000003, 0.03, 0, Q0, Q_dash_0);
-
-% Calculate V_out as R*z
-V_out = R*out_z;
-
-figure; hold on;
-plot(out_x, V_out);
-input_vals = arrayfun(input, out_x);
-plot(out_x, input_vals);
-title('Test 3: Square wave, resonance frequency (102.7 Hz)(OD)')
-xlabel('Time/s');
-ylabel('Voltage/V');
 
