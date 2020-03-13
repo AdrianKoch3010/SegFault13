@@ -1,8 +1,8 @@
 close all;
 
 % Graph labels
-IN = "Input";
-OUT = "Output";
+IN = "V_{in}";
+OUT = "V_{out}";
 
 % Circuit parameters
 R = 250;
