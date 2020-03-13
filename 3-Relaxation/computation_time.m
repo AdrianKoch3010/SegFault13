@@ -18,25 +18,12 @@ for i = 2:300
     
     % Calculate the output grid
     [grid_out, count] = relaxation(grid_size, b1, b2, b3, b3, required_accuracy);
-    
-    figure;
-    
-    x = 0:1/grid_size:1-(1/grid_size);
-    [X, Y] = meshgrid(x);
-    s = surf(X, Y, grid_out);
-    s.EdgeColor = 'none';
-    colorbar;
-    
+       
     relaxval(i) = count;
     
     figure; 
-    
-    x = 0:1/grid_size:1-(1/grid_size);
+
     [grid_out, count2] = SOR(grid_size, b1, b2, b3, b3, required_accuracy);
-    [X, Y] = meshgrid(x);
-    s = surf(X, Y, grid_out);
-    s.EdgeColor = 'none';
-    colorbar;
     
     SORval(i) = count2;
 end
