@@ -179,8 +179,8 @@ ylim([-1.2, 1.2]);
 R = 2000;
 C = 300 * 10^-9;
 L = 0.3;
-%Q0 = 500 * 10^-9;
-Q0 = 0;
+Q0 = 500 * 10^-9;
+%Q0 = 0;
 %Q_dash_0 = 0;
 
 
@@ -206,6 +206,26 @@ legend([p1; p2], [IN, OUT]);
 xlabel('Time/s');
 ylabel('Voltage/V');
 ylim([-1, 5.5]);
+
+%%%%%%%%%%%TEST 2: Impulse and decay signal %%%%%%%%%%%%%%%%%%%%%%%%
+input = @(x) 5*exp(-x^2 / 0.000003);
+ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
+
+[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.000003, 0.05, 0, Q0, Q_dash_0);
+
+% Calculate V_out as R*z
+V_out = R*out_z;
+
+figure; hold on;
+input_vals = arrayfun(input, out_x);
+p1 = plot(out_x, input_vals);
+p2 = plot(out_x, V_out);
+
+title('Test 2: Impulse decay signal (CD)')
+legend([p1; p2], [IN, OUT]);
+xlabel('Time/s');
+ylabel('Voltage/V');
+ylim([-2, 5.5]);
 
 %%%%%%%%%%%TEST 2: Square wave with frequency f = 5 Hz %%%%%%%%%%%%%%%%%%%%
 input = @(x) square(2*pi*(5)*x);
@@ -292,8 +312,8 @@ ylim([-1.2, 1.2]);
 R = 2000;
 C = 3 * 10^-6;
 L = 0.8;
-%Q0 = 500 * 10^-9;
-Q0 = 0;
+Q0 = 500 * 10^-9;
+%Q0 = 0;
 Q_dash_0 = 0;
 
 %%%%%%%%%%%TEST 1: Step signal  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -318,6 +338,26 @@ legend([p1; p2], [IN, OUT]);
 xlabel('Time/s');
 ylabel('Voltage/V');
 ylim([-1, 5.5]);
+
+%%%%%%%%%%%TEST 2: Impulse and decay signal %%%%%%%%%%%%%%%%%%%%%%%%
+input = @(x) 5*exp(-x^2 / 0.000003);
+ODE_z = @(x, y, z) ((input(x) - R*z - (1/C)*y) / L);
+
+[out_x, out_y, out_z] = RK4(ODE_y, ODE_z, 0.000003, 0.05, 0, Q0, Q_dash_0);
+
+% Calculate V_out as R*z
+V_out = R*out_z;
+
+figure; hold on;
+input_vals = arrayfun(input, out_x);
+p1 = plot(out_x, input_vals);
+p2 = plot(out_x, V_out);
+
+title('Test 2: Impulse decay signal (OD)')
+legend([p1; p2], [IN, OUT]);
+xlabel('Time/s');
+ylabel('Voltage/V');
+ylim([-2, 5.5]);
 
 %%%%%%%%%%%TEST 2: Square wave with frequency f = 5 Hz %%%%%%%%%%%%%%%%%%%%
 input = @(x) square(2*pi*(5)*x);
