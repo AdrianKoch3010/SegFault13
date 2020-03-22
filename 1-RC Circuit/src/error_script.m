@@ -79,13 +79,13 @@ for i = 1:23
     C = plot(out_x3, C_error_y);
     legend([A; B; C], [Aa; Bb; Cc]);
     hold off;
-    A_x(i) = log10(steps(i));
+    A_x(i) = log10(stepsize(i));
     A_yRMS(i) = log10(abs(rms(A_error_y)));
     A_y(i) = log10(mean(A_error_y));
-    B_x(i) = log10(steps(i));
+    B_x(i) = log10(stepsize(i));
     B_yRMS(i) = log10(abs(rms(B_error_y)));
     B_y(i) = log10(mean(B_error_y));
-    C_x(i) = log10(steps(i));
+    C_x(i) = log10(stepsize(i));
     C_yRMS(i) = log10(abs(rms(C_error_y)));
     C_y(i) = log10(mean(C_error_y));
     
