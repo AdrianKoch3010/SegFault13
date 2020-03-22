@@ -17,7 +17,7 @@ for i = 1:10000
     exact_y(i) = (5*(2*pi*(2*pi*exp(-10000*exact_x(i))+sin(20000*pi*exact_x(i)))+cos(20000*pi*exact_x(i))))/(1+(4*pi*pi));
 end
 
-Solution = @(x) (5*(2*pi*(2*pi*exp(-10000*x)+sin(20000*pi*x))+cos(20000*pi*x)))/(1+(4*pi*pi));
+S
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -62,10 +62,9 @@ for i = 1:23
     B_error_y = zeros(1, steps(i));
     C_error_y = zeros(1, steps(i));
     for j = 1:steps(i)
-        %A_error_y(j) = out_y1(j) - exact_y(10000/(steps(i)*j));
-        B_error_y(j) = out_y2(j) - exact_y((10000/steps(i))*j);
-        C_error_y(j) = out_y3(j) - exact_y((10000/steps(i))*j);
-        A_error_y(j) = out_y1(j) - Solution((0.0007 / steps(i))*j);
+        A_error_y(j) = out_y1(j) - exact_y(10000/steps(i)*j);
+        B_error_y(j) = out_y2(j) - exact_y(10000/steps(i)*j);
+        C_error_y(j) = out_y3(j) - exact_y(10000/steps(i)*j);
     end
 
     figure; hold on;
@@ -80,13 +79,13 @@ for i = 1:23
     legend([A; B; C], [Aa; Bb; Cc]);
     hold off;
     A_x(i) = log10(steps(i));
-    A_yRMS(i) = log10(abs(rms(A_error_y)));
+    A_yRMS(i) = log10(rms(A_error_y));
     A_y(i) = log10(mean(A_error_y));
     B_x(i) = log10(steps(i));
-    B_yRMS(i) = log10(abs(rms(B_error_y)));
+    B_yRMS(i) = log10(rms(B_error_y));
     B_y(i) = log10(mean(B_error_y));
     C_x(i) = log10(steps(i));
-    C_yRMS(i) = log10(abs(rms(C_error_y)));
+    C_yRMS(i) = log10(rms(C_error_y));
     C_y(i) = log10(mean(C_error_y));
     
     
