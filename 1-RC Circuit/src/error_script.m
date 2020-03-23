@@ -18,7 +18,6 @@ for i = 1:10000
 end
 
 Solution = @(x) (5*(2*pi*(2*pi*exp(-10000*x)+sin(20000*pi*x))+cos(20000*pi*x)))/(1+(4*pi*pi));
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %2. Analytical Solving
@@ -35,15 +34,15 @@ steps = [2, 4, 5, 8, 10, 16, 20, 25, 40, 50, 80, 100, 125, 200, 250, 400, 500, 6
 stepsize = 10000./steps.*0.00000007;
 %%%%%% DO THE LOOP THROUGH ALL FACTORS OF 10000 %%%%%%
 
-A_x = zeros(1, 23);
-A_yRMS = zeros(1, 23);
-A_y = zeros(1, 23);
-B_x = zeros(1, 23);
-B_yRMS = zeros(1, 23);
-B_y = zeros(1, 23);
-C_x = zeros(1, 23);
-C_yRMS = zeros(1, 23);
-C_y = zeros(1, 23);
+A_x=zeros(1,23);
+A_yRMS=zeros(1,23);
+A_y=zeros(1,23);
+B_x=zeros(1,23);
+B_yRMS=zeros(1,23);
+B_y=zeros(1,23);
+C_x=zeros(1,23);
+C_yRMS=zeros(1,23);
+C_y=zeros(1,23);
 
 for i = 1:23
     [out_x1, out_y1] = RK2(ODE, stepsize(i), 0.0007, 0, 5, 0);
@@ -62,10 +61,9 @@ for i = 1:23
     B_error_y = zeros(1, steps(i));
     C_error_y = zeros(1, steps(i));
     for j = 1:steps(i)
-        %A_error_y(j) = out_y1(j) - exact_y(10000/(steps(i)*j));
-        B_error_y(j) = out_y2(j) - exact_y((10000/steps(i))*j);
-        C_error_y(j) = out_y3(j) - exact_y((10000/steps(i))*j);
-        A_error_y(j) = out_y1(j) - Solution((0.0007 / steps(i))*j);
+        A_error_y(j) =  abs(exact_y((10000/steps(i))*j) - out_y1(j));
+        B_error_y(j) =  abs(exact_y((10000/steps(i))*j)- out_y2(j));
+        C_error_y(j) =  abs(exact_y((10000/steps(i))*j) - out_y3(j));
     end
 
     figure; 
@@ -89,6 +87,9 @@ for i = 1:23
     C_x(i) = log10(stepsize(i));
     C_yRMS(i) = log10(abs(rms(C_error_y)));
     C_y(i) = log10(mean(C_error_y));
+    clear A_error_y;
+    clear B_error_y;
+    clear C_error_y;
     
 end
 
@@ -103,23 +104,13 @@ legend([A; B; C], [Aa; Bb; Cc]);
 hold off;
 
 figure; hold on;
-title("log(rms(average error)) against log(step size)");
-ylabel("log(rms(average error))");
+title("log(rms(error)) against log(step size)");
+ylabel("log(rms(error))");
 xlabel("log(step size)");
 A = plot(A_x, A_yRMS);
 B = plot(B_x, B_yRMS);
 C = plot(C_x, C_yRMS);
 legend([A; B; C], [Aa; Bb; Cc]);
 hold off;
-
-
-
-
-
-
-
-
-
-
 
 
