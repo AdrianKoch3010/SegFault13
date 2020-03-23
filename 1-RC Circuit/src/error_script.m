@@ -14,8 +14,10 @@ exact_x = zeros(1,1000);
 exact_y = zeros(1,1000);
 for i = 1:10000
     exact_x(i)= 0.00000007*i;
-    exact_y(i) = 5*(2*pi*(2*pi*exp(-10000*exact_x(i))+sin(20000*pi*exact_x(i)))+cos(20000*pi*exact_x(i)))/(1+4*pi*pi);
+    exact_y(i) = (5*(2*pi*(2*pi*exp(-10000*exact_x(i))+sin(20000*pi*exact_x(i)))+cos(20000*pi*exact_x(i))))/(1+(4*pi*pi));
 end
+
+Solution = @(x) (5*(2*pi*(2*pi*exp(-10000*x)+sin(20000*pi*x))+cos(20000*pi*x)))/(1+(4*pi*pi));
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -54,7 +56,7 @@ for i = 1:23
     C = plot(out_x3, out_y3);
     E = plot(exact_x, exact_y);
     legend([A; B; C; E], [Aa; Bb; Cc; Ee]);
-    ylabel("V_o_u_t / V"); xlabel("time / ms");
+    ylabel("V_{out} / V"); xlabel("time / s");
     hold off;
     A_error_y = zeros(1, steps(i));
     B_error_y = zeros(1, steps(i));
@@ -64,6 +66,7 @@ for i = 1:23
         B_error_y(j) =  abs(exact_y((10000/steps(i))*j)- out_y2(j));
         C_error_y(j) =  abs(exact_y((10000/steps(i))*j) - out_y3(j));
     end
+
     figure; hold on;
     
     title(strcat("Error between numerical and analytical graphs - ", num2str(steps(i)), " Steps"));
@@ -75,15 +78,14 @@ for i = 1:23
     C = plot(out_x3, C_error_y);
     legend([A; B; C], [Aa; Bb; Cc]);
     hold off;
-    
-    A_x(i) = log10(steps(i));
-    A_yRMS(i) = log10(rms(A_error_y));
+    A_x(i) = log10(stepsize(i));
+    A_yRMS(i) = log10(abs(rms(A_error_y)));
     A_y(i) = log10(mean(A_error_y));
-    B_x(i) = log10(steps(i));
-    B_yRMS(i) = log10(rms(B_error_y));
+    B_x(i) = log10(stepsize(i));
+    B_yRMS(i) = log10(abs(rms(B_error_y)));
     B_y(i) = log10(mean(B_error_y));
-    C_x(i) = log10(steps(i));
-    C_yRMS(i) = log10(rms(C_error_y));
+    C_x(i) = log10(stepsize(i));
+    C_yRMS(i) = log10(abs(rms(C_error_y)));
     C_y(i) = log10(mean(C_error_y));
     clear A_error_y;
     clear B_error_y;
@@ -101,6 +103,7 @@ B = plot(B_x, B_y);
 C = plot(C_x, C_y);
 legend([A; B; C], [Aa; Bb; Cc]);
 hold off;
+
 figure; hold on;
 title("log(rms(error)) against log(total steps)");
 ylabel("log(rms(error))");
