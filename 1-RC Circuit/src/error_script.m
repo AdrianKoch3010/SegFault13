@@ -18,7 +18,6 @@ for i = 1:10000
 end
 
 Solution = @(x) (5*(2*pi*(2*pi*exp(-10000*x)+sin(20000*pi*x))+cos(20000*pi*x)))/(1+(4*pi*pi));
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %2. Analytical Solving
@@ -95,9 +94,9 @@ for i = 1:23
 end
 
 figure; hold on;
-title("log(average error) against log(total steps)");
+title("log(average error) against log(step size)");
 ylabel("log(average error)");
-xlabel("log(total steps)");
+xlabel("log(step size)");
 A = plot(A_x, A_y);
 B = plot(B_x, B_y);
 C = plot(C_x, C_y);
@@ -105,23 +104,13 @@ legend([A; B; C], [Aa; Bb; Cc]);
 hold off;
 
 figure; hold on;
-title("log(rms(error)) against log(total steps)");
+title("log(rms(error)) against log(step size)");
 ylabel("log(rms(error))");
-xlabel("log(total steps)");
+xlabel("log(step size)");
 A = plot(A_x, A_yRMS);
 B = plot(B_x, B_yRMS);
 C = plot(C_x, C_yRMS);
 legend([A; B; C], [Aa; Bb; Cc]);
 hold off;
-
-
-
-
-
-
-
-
-
-
 
 
