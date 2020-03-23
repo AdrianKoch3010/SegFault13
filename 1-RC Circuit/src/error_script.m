@@ -1,4 +1,4 @@
-%error analysis for the RL circuit with a cosine input
+close all
 % the numerical solution is compared to the mathamtically computed exact solution
 % the error is then plotted for each method.
 
@@ -68,7 +68,8 @@ for i = 1:23
         A_error_y(j) = out_y1(j) - Solution((0.0007 / steps(i))*j);
     end
 
-    figure; hold on;
+    figure; 
+    hold on;
     
     title(strcat("Error between numerical and analytical graphs - ", num2str(steps(i)), " Steps"));
     
@@ -88,7 +89,6 @@ for i = 1:23
     C_x(i) = log10(stepsize(i));
     C_yRMS(i) = log10(abs(rms(C_error_y)));
     C_y(i) = log10(mean(C_error_y));
-    
     
 end
 
